@@ -1,6 +1,7 @@
 import React from "react";
 import "./AboutMe.css";
 import Photo from "../../images/photo.jpg";
+import Portfolio from "../Portfolio/Portfolio.js";
 
 function AboutMe() {
   return (
@@ -21,6 +22,7 @@ function AboutMe() {
         </div>
         <img src={Photo} className="about-me__photo" alt="Фото"></img>
       </div>
+      <Portfolio />
     </section>
   );
 }

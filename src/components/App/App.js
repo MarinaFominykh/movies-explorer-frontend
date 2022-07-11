@@ -6,6 +6,7 @@ import NavTab from "../NavTab/NavTab.js";
 import AboutProject from "../AboutProject/AboutProject.js";
 import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe.js";
+import Footer from "../Footer/Footer.js";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <AboutProject />
       <Techs />
       <AboutMe />
+      <Footer />
     </div>
   );
 }

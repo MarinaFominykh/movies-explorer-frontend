@@ -3,7 +3,7 @@ import "./Header.css";
 
 function Header() {
   return (
-    <div className="header">
+    <header className="header">
       <div className="header__logo"></div>
       <ul className="header__incom-container">
         <li className="header__register">
@@ -13,7 +13,7 @@ function Header() {
           <button className="header__incom-button">Войти</button>
         </li>
       </ul>
-    </div>
+    </header>
   );
 }
 
