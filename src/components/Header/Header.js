@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 import "./Header.css";
 import HeaderLanding from "../HeaderLanding/HeaderLanding.js";
@@ -14,7 +14,10 @@ function Header({ onPopupWithMenu }) {
 
   return (
     <header className={headerClassName}>
-      <div className="header__logo"></div>
+      <Link to="/">
+        <div className="header__logo"></div>
+      </Link>
+
       {isLocation ? (
         <HeaderLanding />
       ) : (

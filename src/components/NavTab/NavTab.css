@@ -17,6 +17,11 @@
     border-bottom: 1px solid #FFFFFF;
     text-decoration-line: none;
     text-align: center;
+    transition: .5s;
+}
+
+.nav-tab__link:hover {
+    opacity: .6;
 }
 
 @media screen and (max-width: 540px) {

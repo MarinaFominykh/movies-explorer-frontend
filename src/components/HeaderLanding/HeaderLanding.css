@@ -3,27 +3,28 @@
     justify-content: space-between;
     gap: 30px;
     list-style: none;
-    font-size: 12px;
-    line-height: 16px;
-    color: #FFFFFF;
-    padding: 0;
+
 
 }
 
-.header__incom-button {
-    max-width: 77px;
-    width: auto;
-    height: 32px;
+.header__incom {
+    min-width: 76px;
+    text-decoration: none;
     border-radius: 3px;
     text-align: center;
-    background-color: transparent;
     color: #FFFFFF;
-    padding: 0;
-    border: none;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 32px;
     cursor: pointer;
+    transition: .5s;
 }
 
-.header__incom-button:active {
+.header__incom:hover {
+    opacity: .6;
+}
+
+.header__incom:active {
     background-color: #2BE080;
     color: #000000;
 

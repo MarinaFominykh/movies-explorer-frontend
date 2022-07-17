@@ -22,8 +22,17 @@
     height: 38px;
     background-image: url(../../images/logo_header-decktop.svg);
     background-repeat: no-repeat;
+    cursor: pointer;
+    transition: .5s;
 }
 
+.header__logo:hover {
+    opacity: .6;
+}
+
+.header__logo:hover:focus {
+    border: 1px black solid;
+}
 
 @media screen and (max-width: 960px) {
     .header {

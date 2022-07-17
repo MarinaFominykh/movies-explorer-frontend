@@ -110,9 +110,7 @@
         padding-top: 232px;
     }
 
-    .register__form {
-        gap: 91px;
-    }
+
 }
 
 @media screen and (max-width: 540px) {
@@ -131,7 +129,7 @@
     }
 
     .register__form {
-        gap: 179px;
+        gap: 157px;
     }
 
     .register__submit {

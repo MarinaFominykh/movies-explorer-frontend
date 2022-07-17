@@ -12,6 +12,7 @@ import PopupWithMenu from "../PopupWithMenu/PopupWithMenu.js";
 import Profile from "../Profile/Profile.js";
 import PageNotFound from "../PageNotFound/PageNotFoun.js";
 import Register from "../Register/Register.js";
+import Login from "../Login/Login.js";
 
 import Movies from "../Movies/Movies.js";
 import { initialMoviesCards } from "../../utils/moviesCards.js";
@@ -58,6 +59,9 @@ function App() {
         </Route>
         <Route path="/sign-up">
           <Register />
+        </Route>
+        <Route path="/sign-in">
+          <Login />
         </Route>
         <Route path="*">
           <PageNotFound />

@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./PopupWithMenu.css";
-import { burger, menuPopup, page } from "../../utils/constans.js";
 
 function PopupWithMenu({ isOpen, onClose, closePopup }) {
   return (
