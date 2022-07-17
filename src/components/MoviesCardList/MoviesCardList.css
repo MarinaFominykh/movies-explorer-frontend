@@ -4,7 +4,7 @@
     margin: 0 0 60px 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(4, fit-content(270px));
+    grid-template-columns: repeat(4, minmax(min-content, 270px));
     grid-template-rows: auto;
     justify-content: center;
     column-gap: 20px;
@@ -15,7 +15,7 @@
     .movies-card-list {
         max-width: 708px;
         margin: auto;
-        grid-template-columns: repeat(2, fit-content(339px));
+        grid-template-columns: repeat(2, minmax(min-content, 339px));
         grid-template-rows: auto;
         gap: 30px;
     }
@@ -23,11 +23,9 @@
 
 @media screen and (max-width: 540px) {
     .movies-card-list {
-        max-width: 300px;
-        display: flex;
-        flex-direction: column;
+
+        grid-template-columns: minmax(min-content, 300px);
         gap: 34px;
-        justify-content: center;
         margin: 0 auto 60px;
 
     }

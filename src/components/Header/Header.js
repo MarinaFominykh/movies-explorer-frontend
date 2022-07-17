@@ -1,18 +1,25 @@
 import React from "react";
-import "./Header.css";
+import { useNavigate, useLocation } from "react-router-dom";
 
-function Header() {
+import "./Header.css";
+import HeaderLanding from "../HeaderLanding/HeaderLanding.js";
+import HeaderDefault from "../HeaderDefault/HeaderDefault.js";
+
+function Header({ onPopupWithMenu }) {
+  let location = useLocation();
+  const isLocation = location.pathname === "/";
+  const headerClassName = `${
+    isLocation ? "header header_theme_dark" : "header header_theme_light"
+  }`;
+
   return (
-    <header className="header">
+    <header className={headerClassName}>
       <div className="header__logo"></div>
-      <ul className="header__incom-container">
-        <li className="header__register">
-          <button className="header__incom-button">Регистрация</button>
-        </li>
-        <li className="header__login">
-          <button className="header__incom-button">Войти</button>
-        </li>
-      </ul>
+      {isLocation ? (
+        <HeaderLanding />
+      ) : (
+        <HeaderDefault onPopupWithMenu={onPopupWithMenu} />
+      )}
     </header>
   );
 }

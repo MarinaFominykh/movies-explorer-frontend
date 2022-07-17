@@ -1,12 +1,20 @@
 .header {
     width: 100%;
+    max-width: 1280px;
     min-height: 74px;
-    background-color: #073042;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 70px 0 60px;
+    padding: 0 70px;
     box-sizing: border-box;
+}
+
+.header_theme_dark {
+    background-color: #073042;
+}
+
+.header_theme_light {
+    background-color: #fff;
 }
 
 .header__logo {
@@ -16,36 +24,6 @@
     background-repeat: no-repeat;
 }
 
-.header__incom-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-    list-style: none;
-    font-size: 12px;
-    line-height: 16px;
-    color: #FFFFFF;
-    padding: 0;
-
-}
-
-.header__incom-button {
-    max-width: 77px;
-    width: auto;
-    height: 32px;
-    border-radius: 3px;
-    text-align: center;
-    background-color: transparent;
-    color: #FFFFFF;
-    padding: 0;
-    border: none;
-    cursor: pointer;
-}
-
-.header__incom-button:active {
-    background-color: #2BE080;
-    color: #000000;
-
-}
 
 @media screen and (max-width: 960px) {
     .header {
@@ -63,9 +41,4 @@
         padding: 0 14px;
     }
 
-    .header__incom-container {
-        font-size: 10px;
-        gap: 14px;
-
-    }
 }
