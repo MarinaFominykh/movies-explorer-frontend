@@ -16,8 +16,19 @@ function AboutMe() {
             настоящее время изучаю профессию веб-разработчика.
           </p>
           <ul className="about-me__site-container">
-            <li className="about-me__site">Facebook</li>
-            <li className="about-me__site">GitHub</li>
+            <li className="about-me__site">
+              <a href="#" className="about-me__site-link">
+                Facebook
+              </a>
+            </li>
+            <li className="about-me__site">
+              <a
+                href="https://github.com/MarinaFominykh/MarinaFominykh"
+                className="about-me__site-link"
+              >
+                GitHub
+              </a>
+            </li>
           </ul>
         </div>
         <img src={Photo} className="about-me__photo" alt="Фото"></img>

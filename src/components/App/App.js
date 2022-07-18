@@ -13,14 +13,10 @@ import Profile from "../Profile/Profile.js";
 import PageNotFound from "../PageNotFound/PageNotFoun.js";
 import Register from "../Register/Register.js";
 import Login from "../Login/Login.js";
-
-import Movies from "../Movies/Movies.js";
-import { initialMoviesCards } from "../../utils/moviesCards.js";
-import { savedMovies } from "../../utils/savedMovies.js";
+import Main from "../Main/Main.js";
+import SavedMovies from "../SavedMovies/SavedMovies.js";
 
 function App() {
-  const [cards, setCards] = useState(initialMoviesCards);
-  const [savedMoviesCards, setSavedMovies] = useState(savedMovies);
   const [isPopupWithMenuOpen, setIsPopupWithMenuOpen] = useState(false);
 
   const handlerPopupWithMenuClick = () => {
@@ -44,14 +40,10 @@ function App() {
           <Footer />
         </Route>
         <Route path="/movies">
-          <Header onPopupWithMenu={handlerPopupWithMenuClick} />
-          <Movies moviesCards={cards} />
-          <Footer />
+          <Main onPopupWithMenu={handlerPopupWithMenuClick} />
         </Route>
         <Route path="/saved-movies">
-          <Header onPopupWithMenu={handlerPopupWithMenuClick} />
-          <Movies moviesCards={savedMoviesCards} />
-          <Footer />
+          <SavedMovies onPopupWithMenu={handlerPopupWithMenuClick} />
         </Route>
         <Route path="/profile">
           <Header onPopupWithMenu={handlerPopupWithMenuClick} />

@@ -1,28 +1,31 @@
-import { useEffect, useState } from "react";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import "./Login.css";
 
-function Login(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function Login() {
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    reset,
+  } = useForm({ mode: "onBlur" });
+  const submitClassName = `${
+    isValid ? "login__submit" : "login__submit_disable"
+  }`;
+  const onSubmit = (e) => {
+    reset();
+  };
 
-  function handleInputEmailChange(e) {
-    setEmail(e.target.value);
-  }
-
-  function handleInputPassChange(e) {
-    setPassword(e.target.value);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
   return (
     <section className="login">
       <div className="login__logo"></div>
       <h2 className="login__title">Рады видеть!</h2>
-      <form className="login__form" onSubmit={handleSubmit}>
+      <form
+        className="login__form"
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <fieldset className="login__inputs">
           <label className="login__label" for="email">
             E-mail
@@ -31,10 +34,24 @@ function Login(props) {
               type="email"
               className="login__input"
               placeholder="Email"
-              value={email}
-              onChange={handleInputEmailChange}
-              required
+              {...register("email", {
+                required: "Поле обязательно к заполнению",
+                pattern: {
+                  value:
+                    /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/,
+                  message: "Введён некорректный e-mail",
+                },
+              })}
             ></input>
+            <span
+              className={
+                errors?.email
+                  ? "login__input-error_active login__input_error"
+                  : "login__input-error"
+              }
+            >
+              {errors?.email?.message}
+            </span>
           </label>
 
           <label className="login__label" for="password">
@@ -44,18 +61,23 @@ function Login(props) {
               type="password"
               className="login__input"
               placeholder="Пароль"
-              value={password}
-              onChange={handleInputPassChange}
-              required
+              {...register("password", {
+                required: "Поле обязательно к заполнению",
+              })}
             ></input>
+            <span
+              className={
+                errors?.password
+                  ? "login__input-error_active login__input_error"
+                  : "login__input-error"
+              }
+            >
+              {errors?.password?.message}
+            </span>
           </label>
         </fieldset>
-        <button
-          type="submit"
-          className="login__submit"
-          value="Зарегистрироваться"
-        >
-          Зарегистрироваться
+        <button type="submit" className={submitClassName} value="Войти">
+          Войти
         </button>
       </form>
 

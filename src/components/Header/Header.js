@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
-
 import "./Header.css";
 import HeaderLanding from "../HeaderLanding/HeaderLanding.js";
 import HeaderDefault from "../HeaderDefault/HeaderDefault.js";

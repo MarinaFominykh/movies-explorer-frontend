@@ -3,8 +3,6 @@
     justify-content: space-between;
     gap: 30px;
     list-style: none;
-
-
 }
 
 .header__incom {
@@ -27,13 +25,11 @@
 .header__incom:active {
     background-color: #2BE080;
     color: #000000;
-
 }
 
 @media screen and (max-width: 540px) {
     .header__incom-container {
         font-size: 10px;
         gap: 14px;
-
     }
 }

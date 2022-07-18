@@ -33,7 +33,6 @@
     font-weight: 400;
     font-size: 10px;
     line-height: 12px;
-
     color: #A0A0A0;
 }
 
@@ -56,6 +55,18 @@
     padding-left: 15px;
 }
 
+.login__input-error {
+    opacity: 0;
+    height: 12px;
+
+}
+
+.login__input-error_active {
+    color: #FF3055;
+    opacity: 1;
+    height: 12px;
+}
+
 .login__submit {
     width: 100%;
     padding: 0;
@@ -69,6 +80,20 @@
     color: #FFFFFF;
     cursor: pointer;
     transition: .5s;
+    margin-bottom: 16px;
+}
+
+.login__submit_disable {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    border: none;
+    background: #F8F8F8;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 45px;
+    color: #C2C2C2;
     margin-bottom: 16px;
 }
 

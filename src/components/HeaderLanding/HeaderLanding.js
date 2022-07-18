@@ -10,20 +10,14 @@ function HeaderLanding() {
         activeClassName="header__incom_active"
         className="header__incom"
       >
-        <li className="header__register">
-          Регистрация
-          {/* <button className="header__incom-button">Регистрация</button> */}
-        </li>
+        <li className="header__register">Регистрация</li>
       </NavLink>
       <NavLink
         to="sign-in"
         activeClassName="header__incom_active"
         className="header__incom"
       >
-        <li className="header__login">
-          Войти
-          {/* <button className="header__incom-button">Войти</button> */}
-        </li>
+        <li className="header__login">Войти</li>
       </NavLink>
     </ul>
   );
