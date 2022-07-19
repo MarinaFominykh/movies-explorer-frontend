@@ -3,7 +3,6 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Promo from "../Promo/Promo.js";
-import NavTab from "../NavTab/NavTab.js";
 import AboutProject from "../AboutProject/AboutProject.js";
 import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe.js";
@@ -33,7 +32,6 @@ function App() {
         <Route exact path="/">
           <Header onPopupWithMenu={handlerPopupWithMenuClick} />
           <Promo />
-          <NavTab />
           <AboutProject />
           <Techs />
           <AboutMe />

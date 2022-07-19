@@ -37,8 +37,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 17px;
-
+    gap: 13px;
 }
 
 .header__account-text {
@@ -46,9 +45,11 @@
 }
 
 .header__account-icon {
-    width: 26px;
+    width: 30px;
     height: 30px;
-    background-image: url(../../images/icon_account.png);
+    background-color: #F9F9F9;
+    border-radius: 6px;
+    background-image: url(../../images/icon_account.svg);
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -62,6 +63,8 @@
     margin: 0;
     padding: 0;
     border: none;
+    cursor: pointer;
+    transition: .5s;
 }
 
 .header__menu:hover {

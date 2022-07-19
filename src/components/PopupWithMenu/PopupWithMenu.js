@@ -37,16 +37,17 @@ function PopupWithMenu({ isOpen, onClose, closePopup }) {
             </li>
           </NavLink>
         </ul>
+        <NavLink
+          to="/profile"
+          activeClassName="menu__link_active"
+          className="menu__link menu__account"
+        >
+          <p className="menu__account-text" onClick={closePopup}>
+            Аккаунт
+          </p>
+          <div className="menu__account-icon"></div>
+        </NavLink>
       </nav>
-      <NavLink
-        to="/profile"
-        activeClassName="menu__link_active"
-        className="menu__link"
-      >
-        <p className="menu__account" onClick={closePopup}>
-          Аккаунт
-        </p>
-      </NavLink>
     </aside>
   );
 }

@@ -3,10 +3,13 @@
     justify-content: space-between;
     gap: 30px;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .header__incom {
     min-width: 76px;
+
     text-decoration: none;
     border-radius: 3px;
     text-align: center;

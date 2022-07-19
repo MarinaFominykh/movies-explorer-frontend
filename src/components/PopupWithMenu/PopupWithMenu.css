@@ -38,8 +38,8 @@
 }
 
 .menu {
-    min-width: 520px;
-    height: 100%;
+    width: 520px;
+    height: 80vh;
     background: #FFFFFF;
     position: fixed;
     top: 0;
@@ -49,6 +49,9 @@
     font-size: 18px;
     line-height: 22px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .menu__container {
@@ -58,7 +61,8 @@
     justify-content: center;
     align-items: center;
     gap: 28px;
-
+    padding: 0;
+    margin: 0;
 }
 
 .menu__link {
@@ -70,12 +74,18 @@
     text-decoration: underline;
 }
 
+.menu__link:last-of-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 13px;
+}
+
 .menu__item {
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
     text-align: center;
-
     color: #000000;
     transition: .5s;
     cursor: pointer;
@@ -86,20 +96,42 @@
 }
 
 .menu__account {
-    position: fixed;
-    bottom: 98px;
-    right: 210px;
+    margin: 0 auto 92px;
     transition: .5s;
     width: 100px;
     font-weight: 500;
     font-size: 14px;
-    line-height: 36px;
-    background: #F5F5F5;
+    line-height: 16px;
     text-align: center;
     border-radius: 20px;
+}
 
+.menu__account-text {
+    margin: 0;
 }
 
 .menu__account:hover {
     opacity: .6;
+}
+
+.menu__account-icon {
+    width: 30px;
+    height: 30px;
+    background: #F9F9F9 url(../../images/icon_account.svg) no-repeat center;
+    border-radius: 6px;
+}
+
+
+@media screen and (max-width: 540px) {}
+
+@media screen and (max-width: 540px) {
+    .menu {
+        min-width: auto;
+        width: 320px;
+    }
+
+    .menu__container {
+        padding: 0;
+    }
+
 }

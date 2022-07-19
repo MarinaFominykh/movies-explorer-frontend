@@ -5,7 +5,9 @@ function MoviesCard(props) {
   let location = useLocation();
   const isLocation = location.pathname === "/movies";
   const buttonClassName = `${
-    isLocation ? "movies-card__like-button" : "movies-card__delete-button"
+    isLocation
+      ? "movies-card__like-button_active"
+      : "movies-card__delete-button"
   }`;
   return (
     <li className="movies-card">
@@ -14,12 +16,14 @@ function MoviesCard(props) {
           <img src={props.image} className="movies-card__image"></img>
         </div>
 
-        <figcaption className="movies-card__text-container">
-          <p className="movies-card__text">{props.nameRu}</p>
+        <figcaption className="movies-card__figcaption-container">
+          <div className="movies-card__text-container">
+            <p className="movies-card__text">{props.nameRu}</p>
+            <p className="movies-card__time">{props.duration}</p>
+          </div>
           <button className={buttonClassName}></button>
         </figcaption>
       </figure>
-      <p className="movies-card__time">{props.duration}</p>
     </li>
   );
 }

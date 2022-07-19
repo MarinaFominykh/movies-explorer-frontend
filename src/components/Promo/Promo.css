@@ -1,15 +1,15 @@
 .promo {
     width: 100%;
-    min-height: 524px;
+    min-height: 574px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 36px;
     background-color: #073042;
-    background-image: url(../../images/promo_logo.png);
+    background-image: url(../../images/promo.png);
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: 320px 320px;
-    object-position: center;
+    background-position: top 75px right 70px;
+    background-size: 310px 304px;
 
 }
 
@@ -17,29 +17,97 @@
     font-weight: 400;
     font-size: 50px;
     line-height: 58px;
-    letter-spacing: -0.04em;
     color: #FFFFFF;
-    max-width: 730px;
-    margin: 0 auto;
-    text-align: center;
+    max-width: 635px;
+    margin: 0 auto 0 70px;
 
+}
+
+.promo__text {
+    max-width: 310px;
+    margin: 0 auto 110px 70px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+}
+
+.promo__button {
+    opacity: 0.6;
+    border: 1px solid #FFFFFF;
+    border-radius: 3px;
+    text-decoration: none;
+    background: transparent;
+    width: 129px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 36px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-left: 70px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.promo__button:hover {
+    opacity: .3;
 }
 
 @media screen and (max-width: 960px) {
     .promo {
-        min-height: 784px;
+        justify-content: space-between;
+        min-height: 850px;
+        background-position: top 140px center;
+        gap: 22px;
+    }
+
+    .promo__title {
+        font-size: 40px;
+        line-height: 50px;
+        max-width: 680px;
+        margin: 492px auto 0;
+        text-align: center;
+    }
+
+    .promo__text {
+        margin: 0 auto 70px;
+        text-align: center;
+    }
+
+    .promo__button {
+        margin: 0 auto 76px;
+        text-align: center;
     }
 }
 
 @media screen and (max-width: 540px) {
     .promo {
-        min-height: 570px;
+        min-height: 636px;
+        background-position: top 70px center;
+        background-size: 210px 206px;
+        gap: 24px;
     }
 
     .promo__title {
         max-width: 300px;
         font-size: 31px;
         line-height: 39px;
+        font-size: 30px;
+        line-height: 38px;
+        text-align: center;
+        letter-spacing: -0.04em;
+        margin: 320px auto 0;
+    }
+
+    .promo__text {
+        margin-bottom: 56px;
+
+    }
+
+    .promo__button {
+        margin-bottom: 30px;
     }
 
 }
