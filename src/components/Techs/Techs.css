@@ -4,7 +4,6 @@
     padding: 100px 70px 0 70px;
     box-sizing: border-box;
     background-color: #F5F5F5;
-
 }
 
 .techs__title {
@@ -56,6 +55,8 @@
     text-align: center;
     letter-spacing: -0.04em;
     align-self: center;
+    padding: 0 14px;
+    box-sizing: border-box;
 }
 
 @media screen and (max-width: 960px) {
@@ -78,6 +79,7 @@
         width: 84px;
         font-size: 12px;
         line-height: 57px;
+        height: 57px;
     }
 }
 
@@ -85,6 +87,7 @@
     .techs {
         padding: 70px 18px 0 18px;
         min-height: 651px;
+        background-color: #ffffff;
     }
 
 
@@ -109,7 +112,7 @@
 
     .techs__list {
         display: grid;
-        grid-template-columns: minmax(84px, 1fr) minmax(84px, 1fr);
+        grid-template-columns: repeat(2, 87px);
         grid-template-rows: auto;
         padding: 0 53px;
         box-sizing: border-box;

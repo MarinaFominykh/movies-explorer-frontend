@@ -12,7 +12,9 @@ function Main({ onPopupWithMenu }) {
   return (
     <>
       <Header onPopupWithMenu={onPopupWithMenu} />
-      <Movies moviesCards={cards} />
+      <main className="main">
+        <Movies moviesCards={cards} />
+      </main>
       <Footer />
     </>
   );

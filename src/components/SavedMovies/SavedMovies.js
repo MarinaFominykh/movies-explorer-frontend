@@ -11,7 +11,9 @@ function SavedMovies({ onPopupWithMenu }) {
   return (
     <>
       <Header onPopupWithMenu={onPopupWithMenu} />
-      <Movies moviesCards={savedMoviesCards} />
+      <main className="main">
+        <Movies moviesCards={savedMoviesCards} />
+      </main>
       <Footer />
     </>
   );

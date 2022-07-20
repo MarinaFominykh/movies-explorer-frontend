@@ -13,7 +13,7 @@ function MoviesCard(props) {
     <li className="movies-card">
       <figure className="movies-card__container">
         <div className="movies-card__image-container">
-          <img src={props.image} className="movies-card__image"></img>
+          <img src={props.image} className="movies-card__image" alt={props.nameRu}></img>
         </div>
 
         <figcaption className="movies-card__figcaption-container">

@@ -31,10 +31,12 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Header onPopupWithMenu={handlerPopupWithMenuClick} />
-          <Promo />
-          <AboutProject />
-          <Techs />
-          <AboutMe />
+          <main className="main">
+            <Promo />
+            <AboutProject />
+            <Techs />
+            <AboutMe />
+          </main>
           <Footer />
         </Route>
         <Route path="/movies">

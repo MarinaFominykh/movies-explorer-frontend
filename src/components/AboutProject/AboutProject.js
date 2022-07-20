@@ -22,8 +22,12 @@ function AboutProject() {
         </dd>
       </dl>
       <div className="about-project__indicator-container">
-        <div className="about-project__indicator about-project__indicator_back"></div>
-        <div className="about-project__indicator about-project__indicator_front"></div>
+        <div className="about-project__indicator about-project__indicator_back">
+          1 неделя
+        </div>
+        <div className="about-project__indicator about-project__indicator_front">
+          4 недели
+        </div>
         <p className="about-project__indicator-text about-project__indicator-text_back">
           Back-end
         </p>
