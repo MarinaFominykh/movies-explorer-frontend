@@ -1,0 +1,137 @@
+.popup {
+    width: 100%;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    /* z-index: 1; */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+
+}
+
+.popup_opened {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.popup__close-button {
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+    width: 23px;
+    height: 23px;
+    background: transparent url(../../images/close.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    border: none;
+    transition: .5s;
+}
+
+.popup__close-button:hover {
+    opacity: .6;
+}
+
+.menu {
+    width: 520px;
+    height: 80vh;
+    background: #FFFFFF;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 159px 0 0 0;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu__container {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    padding: 0;
+    margin: 0;
+}
+
+.menu__link {
+    text-decoration: none;
+    color: #000000;
+}
+
+.menu__link_active {
+    text-decoration: underline;
+}
+
+.menu__link:last-of-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 13px;
+}
+
+.menu__item {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.menu__item:hover {
+    opacity: .6;
+}
+
+.menu__account {
+    margin: 0 auto 92px;
+    transition: .5s;
+    width: 100px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.menu__account-text {
+    margin: 0;
+}
+
+.menu__account:hover {
+    opacity: .6;
+}
+
+.menu__account-icon {
+    width: 30px;
+    height: 30px;
+    background: #F9F9F9 url(../../images/icon_account.svg) no-repeat center;
+    border-radius: 6px;
+}
+
+
+@media screen and (max-width: 540px) {}
+
+@media screen and (max-width: 540px) {
+    .menu {
+        min-width: auto;
+        width: 320px;
+    }
+
+    .menu__container {
+        padding: 0;
+    }
+
+}

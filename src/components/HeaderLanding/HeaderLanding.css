@@ -1,0 +1,38 @@
+.header__incom-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header__incom {
+    min-width: 76px;
+
+    text-decoration: none;
+    border-radius: 3px;
+    text-align: center;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 32px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.header__incom:hover {
+    opacity: .6;
+}
+
+.header__incom:active {
+    background-color: #2BE080;
+    color: #000000;
+}
+
+@media screen and (max-width: 540px) {
+    .header__incom-container {
+        font-size: 10px;
+        gap: 14px;
+    }
+}
