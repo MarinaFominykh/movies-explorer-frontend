@@ -13,12 +13,19 @@ function MoviesCard({
 }) {
   let location = useLocation();
   const isLocation = location.pathname === "/movies";
+  const isLiked = checkLiked(movie);
+  const likeButtonColor = `${
+    !isLiked 
+    ? "movies-card__like-button"
+    : "movies-card__like-button_active"
+
+  }`
   const buttonClassName = `${
     isLocation
-      ? "movies-card__like-button_active"
-      : "movies-card__delete-button"
+      ? likeButtonColor
+      : "movies-card__delete-button" 
   }`;
-  const isLiked = checkLiked(movie);
+ 
 
   function countTime(n) {
     return `${parseInt(n / 60)} ч ${n % 60} м`;
