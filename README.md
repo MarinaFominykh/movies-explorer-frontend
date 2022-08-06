@@ -30,3 +30,6 @@
 - JavaScript;
 - React;
 - Git;
+
+## Ссылка на pull request:
+https://github.com/MarinaFominykh/movies-explorer-frontend/pull/2
