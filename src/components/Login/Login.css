@@ -22,7 +22,7 @@
 .login__form {
     display: flex;
     flex-direction: column;
-    gap: 157px;
+    gap: 134px;
 }
 
 .login__label {

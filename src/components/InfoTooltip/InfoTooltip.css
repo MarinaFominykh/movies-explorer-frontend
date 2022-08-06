@@ -1,0 +1,11 @@
+.infotooltip {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    height: 13px;
+    text-align: center;
+    color: #FF004C;
+    margin: 0 auto 20px auto;
+    display: block;
+
+}

@@ -1,31 +1,41 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import "./Main.css";
-import Header from "../Header/Header.js";
 import Movies from "../Movies/Movies.js";
-import Footer from "../Footer/Footer.js";
-import { initialMoviesCards } from "../../utils/moviesCards.js";
-import {moviesApi} from "../../utils/MoviesApi.js"
+import Header from "../Header/Header.js";
 
-function Main({ onPopupWithMenu }) {
-  const [cards, setCards] = useState([]);
-  useEffect(() => {
-    moviesApi
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-        console.log(res)
-      })
-      .catch(console.log);
-  }, []);
-
+function Main({
+  onPopupWithMenu,
+  loggedIn,
+  onSubmitSearch,
+  message,
+  setMessage,
+  movies,
+  allMovies,
+  toggleMovieLike,
+  checkLiked,
+  savedmovie,
+  sortShortMovies,
+  setPreloader,
+  preloader,
+}) {
   return (
     <>
-      <Header onPopupWithMenu={onPopupWithMenu} />
+      <Header onPopupWithMenu={onPopupWithMenu} loggedIn={loggedIn} />
       <main className="main">
-        <Movies moviesCards={cards} />
+        <Movies
+          onSubmitSearch={onSubmitSearch}
+          message={message}
+          setMessage={setMessage}
+          movies={movies}
+          toggleMovieLike={toggleMovieLike}
+          checkLiked={checkLiked}
+          savedmovie={savedmovie}
+          sortShortMovies={sortShortMovies}
+          allMovies={allMovies}
+          setPreloader={setPreloader}
+          preloader={preloader}
+        />
       </main>
-      <Footer />
     </>
   );
 }

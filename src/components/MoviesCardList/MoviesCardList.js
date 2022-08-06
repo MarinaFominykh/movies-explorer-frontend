@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard.js";
 
-function MoviesCardList({ moviesCards }) {
+function MoviesCardList({
+  moviesCards,
+  toggleMovieLike,
+  checkLiked,
+  savedmovie,
+  count,
+}) {
   return (
     <ul className="movies-card-list">
-      {moviesCards.map((item) => (
-        <MoviesCard {...item} key={item._id} />
+      {moviesCards.slice(0, count).map((item) => (
+        <MoviesCard
+          {...item}
+          key={item._id}
+          onMovieLike={toggleMovieLike}
+          movie={item}
+          checkLiked={checkLiked}
+          savedmovie={savedmovie}
+        />
       ))}
     </ul>
   );
