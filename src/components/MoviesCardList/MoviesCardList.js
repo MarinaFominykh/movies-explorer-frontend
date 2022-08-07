@@ -14,7 +14,7 @@ function MoviesCardList({
       {moviesCards.slice(0, count).map((item) => (
         <MoviesCard
           {...item}
-          key={item._id}
+          key={item.id}
           onMovieLike={toggleMovieLike}
           movie={item}
           checkLiked={checkLiked}

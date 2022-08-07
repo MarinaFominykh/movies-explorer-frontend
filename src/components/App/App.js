@@ -135,9 +135,13 @@ function App() {
       .then((usersmovies) => {
         setUsersMovies(usersmovies);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        if (error === 404) {
+          showInfoToolTip("У вас отсутствуют сохраненные фильмы");
+        }
+        console.log(error);
+      });
   }
-
   function checkLiked(movie) {
     return usersMovies.some((usersMovies) => usersMovies.movieId === movie.id);
   }
@@ -198,8 +202,11 @@ function App() {
   const handleSignOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("movies");
-    localStorage.removeItem("moviesSearch");
+    localStorage.removeItem("searchMovies");
     setLoggedIn(false);
+    setMovies([]);
+    setSearchMovies([]);
+    setUsersMovies([]);
     history.push("/");
   };
 

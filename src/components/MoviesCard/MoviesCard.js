@@ -15,17 +15,11 @@ function MoviesCard({
   const isLocation = location.pathname === "/movies";
   const isLiked = checkLiked(movie);
   const likeButtonColor = `${
-    !isLiked 
-    ? "movies-card__like-button"
-    : "movies-card__like-button_active"
-
-  }`
-  const buttonClassName = `${
-    isLocation
-      ? likeButtonColor
-      : "movies-card__delete-button" 
+    !isLiked ? "movies-card__like-button" : "movies-card__like-button_active"
   }`;
- 
+  const buttonClassName = `${
+    isLocation ? likeButtonColor : "movies-card__delete-button"
+  }`;
 
   function countTime(n) {
     return `${parseInt(n / 60)} ч ${n % 60} м`;
@@ -33,7 +27,7 @@ function MoviesCard({
 
   function handleLikeClick() {
     onMovieLike(movie, isLiked);
-    console.log(movie);
+    console.log(isLiked);
   }
   return (
     <li className="movies-card">
