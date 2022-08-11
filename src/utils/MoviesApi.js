@@ -11,7 +11,7 @@ class Moviesapi {
             authorization: `Bearer ${localStorage.getItem("token")}`,
         };
     }
-    getMovies() {
+    getAllMovies() {
         return fetch(`${this._baseUrl}`, {
             headers: {
                 "Content-Type": "application/json"

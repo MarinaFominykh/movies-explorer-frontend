@@ -3,13 +3,15 @@ import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox.js";
 import InfoTooltip from "../InfoTooltip/InfoTooltip.js";
 
-function SearchForm({ onSubmitSearch, message, setIsChecked, setPreloader }) {
-  const [searchValueInput, setsearchValueInput] = useState("");
+function SearchForm({
+  onSubmitSearch,
+  message,
+  setIsChecked,
+  setPreloader,
+  searchValueInput,
+  onChange,
+}) {
   const [isShortMovies, setIsShortMovies] = useState(false);
-
-  function handleInputChange(e) {
-    setsearchValueInput(e.target.value);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,15 +22,16 @@ function SearchForm({ onSubmitSearch, message, setIsChecked, setPreloader }) {
     setIsShortMovies(checked);
     setIsChecked(!isShortMovies);
   }
+
   return (
     <div className="search-form">
-      <form className="search-form__form" onSubmit={handleSubmit}>
+      <form className="search-form__form" onSubmit={handleSubmit} noValidate>
         <input
           className="search-form__input"
           placeholder="Фильм"
           required
           value={searchValueInput}
-          onChange={handleInputChange}
+          onChange={onChange}
         ></input>
         <button type="submit" className="search-form__submit">
           Поиск

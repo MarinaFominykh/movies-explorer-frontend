@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
 
@@ -14,6 +14,7 @@ function MoviesCard({
   let location = useLocation();
   const isLocation = location.pathname === "/movies";
   const isLiked = checkLiked(movie);
+
   const likeButtonColor = `${
     !isLiked ? "movies-card__like-button" : "movies-card__like-button_active"
   }`;
@@ -27,8 +28,8 @@ function MoviesCard({
 
   function handleLikeClick() {
     onMovieLike(movie, isLiked);
-    console.log(isLiked);
   }
+
   return (
     <li className="movies-card">
       <figure className="movies-card__container">

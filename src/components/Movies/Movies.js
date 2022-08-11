@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm.js";
 import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
@@ -19,6 +20,11 @@ function Movies({
   sortShortMovies,
   setPreloader,
   preloader,
+  searchValueInput,
+  setSearchValueInput,
+  onChange,
+  isShortMovies,
+  setIsShortMovies,
 }) {
   const [shortMovies, setShortMovies] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
@@ -26,14 +32,32 @@ function Movies({
   const [defaultAmountMovies, setDefaultAmountMovies] = useState(
     getInitialCount(width)
   );
+  let location = useLocation();
+  const isLocation = location.pathname === "/movies";
+
   function handleLoadMore() {
     setDefaultAmountMovies((prevCount) => prevCount + getLoadStep(width));
   }
+
+  useEffect(() => {
+    const checkBoxState = localStorage.getItem("stateCheckBox");
+    const stateCheckBoxSavedMovies = localStorage.getItem(
+      "stateCheckBoxSavedMovies"
+    );
+    if (isLocation && checkBoxState) {
+      setIsChecked(JSON.parse(checkBoxState));
+    }
+    if (!isLocation && stateCheckBoxSavedMovies) {
+      setIsChecked(JSON.parse(stateCheckBoxSavedMovies));
+    }
+  }, []);
+
   useEffect(() => {
     if (isChecked) {
       setShortMovies(sortShortMovies(movies));
     }
   }, [isChecked]);
+
   return (
     <section className="movies">
       <SearchForm
@@ -42,15 +66,24 @@ function Movies({
         setMessage={setMessage}
         setIsChecked={setIsChecked}
         setPreloader={setPreloader}
+        searchValueInput={searchValueInput}
+        setSearchValueInput={setSearchValueInput}
+        onChange={onChange}
+        isShortMovies={isShortMovies}
+        setIsShortMovies={setIsShortMovies}
       />
-      {preloader && <Preloader />}
-      <MoviesCardList
-        moviesCards={isChecked ? shortMovies : movies}
-        toggleMovieLike={toggleMovieLike}
-        checkLiked={checkLiked}
-        savedmovie={savedmovie}
-        count={defaultAmountMovies}
-      />
+      {preloader ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          moviesCards={isChecked ? shortMovies : movies}
+          toggleMovieLike={toggleMovieLike}
+          checkLiked={checkLiked}
+          savedmovie={savedmovie}
+          count={defaultAmountMovies}
+        />
+      )}
+
       {defaultAmountMovies < allMovies.length && (
         <button className="movies__more-button" onClick={handleLoadMore}>
           Ещё

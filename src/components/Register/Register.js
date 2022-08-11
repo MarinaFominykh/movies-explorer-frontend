@@ -22,7 +22,10 @@ function Register(props) {
 
   return (
     <section className="register">
-      <div className="register__logo"></div>
+      <Link to="/">
+        <div className="register__logo"></div>
+      </Link>
+
       <h2 className="register__title">Добро пожаловать!</h2>
       <form
         className="register__form"

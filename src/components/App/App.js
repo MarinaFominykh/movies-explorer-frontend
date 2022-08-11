@@ -21,6 +21,7 @@ import Login from "../Login/Login.js";
 import Main from "../Main/Main.js";
 import SavedMovies from "../SavedMovies/SavedMovies.js";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
+import ProtectedUserRoute from "../ProtectedUserRoute/ProtectedUserRoute.js";
 import {
   register,
   authorize,
@@ -40,15 +41,18 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
   const [usersMovies, setUsersMovies] = useState([]);
+  const [usersAllMovies, setAllUsersMovies] = useState([]);
   const [isPopupWithMenuOpen, setIsPopupWithMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [infoTooltip, setInfoTooltip] = useState(false);
   const [message, setMessage] = useState("");
   const [preloader, setPreloader] = useState(false);
   const [currentUser, setCurrentUser] = useState(currentUserDefault);
+  const [searchValueInput, setSearchValueInput] = useState("");
+  const [savedSearchValueInput, setSavedSearchValueInput] = useState("");
 
   const history = useHistory();
-  let location = useLocation().pathname;
+  let location = useLocation();
   const handlerPopupWithMenuClick = () => {
     setIsPopupWithMenuOpen(true);
   };
@@ -56,7 +60,7 @@ function App() {
   function fetchMovies() {
     setPreloader(true);
     moviesApi
-      .getMovies()
+      .getAllMovies()
       .then((res) => {
         setMovies(res);
         localStorage.setItem("movies", JSON.stringify(res));
@@ -74,28 +78,57 @@ function App() {
         movie.description.toLowerCase().includes(key.toLowerCase())
       );
     });
-    if (filterMoviesList.length === 0 && location === "/movies") {
+    if (filterMoviesList.length === 0 && location.pathname === "/movies") {
       showInfoToolTip("Ничего не найдено");
-    }
-    if (filterMoviesList.length === 0 && location === "/saved-movies") {
+    } else if (
+      filterMoviesList.length === 0 &&
+      location.pathname === "/saved-movies"
+    ) {
       showInfoToolTip("У вас отсутствуют сохраненные фильмы");
     }
     return filterMoviesList;
   }
 
+  function handlerSavedSearchSubmit(key) {
+    setTimeout(() => setPreloader(false), 500);
+    setUsersMovies(getMovies(usersMovies, key));
+  }
+
   function handlerSearchSubmit(key) {
-    fetchMovies();
-    setTimeout(() => setPreloader(false), 5000);
+    setTimeout(() => setPreloader(false), 500);
+    const localMovies = localStorage.getItem("movies");
+
+    if (key === "") {
+      showInfoToolTip("Введите слово для поиска");
+      return;
+    }
+    if (!localMovies) {
+      moviesApi
+        .getAllMovies()
+        .then((res) => {
+          localStorage.setItem("movies", JSON.stringify(res));
+          setMovies(res);
+          return res;
+        })
+        .then((res) => {
+          localStorage.setItem("keyword", searchValueInput);
+          localStorage.setItem(
+            "searchMovies",
+            JSON.stringify(getMovies(res, key))
+          );
+          setSearchMovies(getMovies(res, key));
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setPreloader(false));
+      return;
+    }
     setSearchMovies(getMovies(movies, key));
+
+    localStorage.setItem("keyword", searchValueInput);
     localStorage.setItem(
       "searchMovies",
       JSON.stringify(getMovies(movies, key))
     );
-  }
-
-  function handlerSavedSearchSubmit(key) {
-    setTimeout(() => setPreloader(false), 5000);
-    setUsersMovies(getMovies(usersMovies, key));
   }
 
   function addMovie(movie) {
@@ -103,30 +136,33 @@ function App() {
       .then((res) => {
         const newUsersdMovie = res;
         setUsersMovies([...usersMovies, newUsersdMovie]);
+        setAllUsersMovies([...usersMovies, newUsersdMovie]);
       })
       .catch((err) => console.log(err));
   }
 
   function removeMovie(movie) {
-    const id = usersMovies.find((item) => item.movieId === movie.id)._id;
+    const savedMovie = usersMovies.find(
+      (item) => item.movieId === movie.id || item.movieId === movie.movieId
+    );
+    const id = savedMovie._id;
     deleteMovie(id)
       .then((res) => {
-        getUsersMovies();
+        const newMoviesList = usersMovies.filter((item) => {
+          if (movie.id === item.movieId || movie.movieId === item.movieId) {
+            return false;
+          } else {
+            return true;
+          }
+        });
+        setUsersMovies(newMoviesList);
+        setAllUsersMovies(newMoviesList);
       })
-      .catch((err) => console.log(err));
-  }
 
-  function removeSavedMovie(movie) {
-    const id = usersMovies.find((item) => item.movieId === movie.movieId)._id;
-    deleteMovie(id)
-      .then((res) => {
-        getUsersMovies();
-      })
       .catch((err) => console.log(err));
   }
 
   function handleLikeMovie(movie, isLiked) {
-    console.log(movie);
     isLiked ? removeMovie(movie) : addMovie(movie);
   }
 
@@ -134,21 +170,40 @@ function App() {
     getSavedMovies()
       .then((usersmovies) => {
         setUsersMovies(usersmovies);
+        setAllUsersMovies(usersmovies);
       })
       .catch((error) => {
-        if (error === 404) {
+        if (error === 404 && location.pathname === "/saved-movies") {
           showInfoToolTip("У вас отсутствуют сохраненные фильмы");
         }
         console.log(error);
       });
   }
+
   function checkLiked(movie) {
-    return usersMovies.some((usersMovies) => usersMovies.movieId === movie.id);
+    if (!usersMovies) {
+      return;
+    }
+    const isLikedMovies = usersAllMovies.find(
+      (item) => item.movieId === movie.id || movie.movieId
+    );
+    if (isLikedMovies) {
+      return true;
+    }
+    return false;
   }
 
   function sortShortMovies(movies) {
     const shortMoviesArray = movies.filter((movie) => movie.duration <= 40);
     return shortMoviesArray;
+  }
+
+  function handleSearchInputChange(e) {
+    setSearchValueInput(e.target.value);
+  }
+
+  function handleSavedSearchInputChange(e) {
+    setSavedSearchValueInput(e.target.value);
   }
 
   const closeAllPopups = () => {
@@ -203,16 +258,22 @@ function App() {
     localStorage.removeItem("token");
     localStorage.removeItem("movies");
     localStorage.removeItem("searchMovies");
+    localStorage.removeItem("keyword");
+    localStorage.removeItem("stateCheckBox");
+    localStorage.removeItem("stateCheckBoxSavedMovies");
     setLoggedIn(false);
     setMovies([]);
     setSearchMovies([]);
+    setAllUsersMovies([]);
     setUsersMovies([]);
+    setSearchValueInput("");
     history.push("/");
   };
 
   const handleUpdateUser = (email, name) => {
     updateProfile(email, name)
       .then((res) => {
+        setCurrentUser(res);
         showInfoToolTip("Данные профиля успешно обновлены!");
       })
       .catch((error) => {
@@ -260,19 +321,23 @@ function App() {
 
   useEffect(() => {
     const localMovies = localStorage.getItem("movies");
-    if (localMovies) {
-      try {
-        setMovies(JSON.parse(localMovies));
-        const searchMovies = JSON.parse(localStorage.getItem("searchMovies"));
-        if (searchMovies) {
-          setSearchMovies(searchMovies);
+    const token = localStorage.getItem("token");
+    if (token) {
+      if (localMovies) {
+        try {
+          setMovies(JSON.parse(localMovies));
+          const searchMovies = JSON.parse(localStorage.getItem("searchMovies"));
+          const keyword = localStorage.getItem("keyword");
+          if (searchMovies) {
+            setSearchMovies(searchMovies);
+          }
+        } catch (err) {
+          localStorage.removeItem("movies");
+          fetchMovies();
         }
-      } catch (err) {
-        localStorage.removeItem("movies");
+      } else {
         fetchMovies();
       }
-    } else {
-      fetchMovies();
     }
   }, []);
 
@@ -283,7 +348,14 @@ function App() {
     } else {
       Promise.all([getUsersMovies(), getProfile(token)]).catch(console.log);
     }
-  }, [loggedIn]);
+  }, []);
+
+  useEffect(() => {
+    const keyword = localStorage.getItem("keyword");
+    if (location.pathname === "/movies" && keyword) {
+      setSearchValueInput(keyword);
+    }
+  }, [currentUser]);
 
   return (
     <div className="page">
@@ -317,6 +389,9 @@ function App() {
                 message={message}
                 preloader={preloader}
                 setPreloader={setPreloader}
+                searchValueInput={searchValueInput}
+                setSearchValueInput={setSearchValueInput}
+                onChange={handleSearchInputChange}
               />
               <Footer />
             </Route>
@@ -328,20 +403,26 @@ function App() {
                 loggedIn={loggedIn}
                 movies={usersMovies}
                 onSubmitSearch={handlerSavedSearchSubmit}
-                toggleMovieLike={removeSavedMovie}
+                toggleMovieLike={removeMovie}
                 checkLiked={checkLiked}
                 sortShortMovies={sortShortMovies}
                 allMovies={usersMovies}
                 message={message}
                 preloader={preloader}
                 setPreloader={setPreloader}
+                searchValueInput={savedSearchValueInput}
+                setSearchValueInput={setSavedSearchValueInput}
+                onChange={handleSavedSearchInputChange}
               />
               <Footer />
             </Route>
           </ProtectedRoute>
           <ProtectedRoute path="/profile" loggedIn={loggedIn}>
             <Route path="/profile">
-              <Header onPopupWithMenu={handlerPopupWithMenuClick} />
+              <Header
+                onPopupWithMenu={handlerPopupWithMenuClick}
+                loggedIn={loggedIn}
+              />
               <Profile
                 handleSignOut={handleSignOut}
                 onUpdateUser={handleUpdateUser}
@@ -350,12 +431,16 @@ function App() {
               />
             </Route>
           </ProtectedRoute>
-          <Route path="/sign-up">
-            <Register handleRegister={handleRegister} message={message} />{" "}
-          </Route>{" "}
-          <Route path="/sign-in">
-            <Login handleLogin={handleLogin} message={message} />
-          </Route>
+          <ProtectedUserRoute path="/sign-up" loggedIn={loggedIn}>
+            <Route path="/sign-up">
+              <Register handleRegister={handleRegister} message={message} />{" "}
+            </Route>{" "}
+          </ProtectedUserRoute>
+          <ProtectedUserRoute path="/sign-in" loggedIn={loggedIn}>
+            <Route path="/sign-in">
+              <Login handleLogin={handleLogin} message={message} />
+            </Route>
+          </ProtectedUserRoute>
           <Route path="*">
             <PageNotFound onClick={handleNotFoundButton} />
           </Route>{" "}

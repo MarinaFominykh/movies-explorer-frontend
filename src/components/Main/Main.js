@@ -17,6 +17,11 @@ function Main({
   sortShortMovies,
   setPreloader,
   preloader,
+  searchValueInput,
+  setSearchValueInput,
+  onChange,
+  isShortMovies,
+  setIsShortMovies,
 }) {
   return (
     <>
@@ -34,6 +39,11 @@ function Main({
           allMovies={allMovies}
           setPreloader={setPreloader}
           preloader={preloader}
+          searchValueInput={searchValueInput}
+          setSearchValueInput={setSearchValueInput}
+          onChange={onChange}
+          isShortMovies={isShortMovies}
+          setIsShortMovies={setIsShortMovies}
         />
       </main>
     </>

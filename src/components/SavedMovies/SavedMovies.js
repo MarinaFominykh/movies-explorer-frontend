@@ -16,6 +16,9 @@ function SavedMovies({
   toggleMovieLike,
   preloader,
   setPreloader,
+  searchValueInput,
+  setSearchValueInput,
+  onChange,
 }) {
   return (
     <>
@@ -23,6 +26,9 @@ function SavedMovies({
       <main className="main">
         <Movies
           onSubmitSearch={onSubmitSearch}
+          setSearchValueInput={setSearchValueInput}
+          onChange={onChange}
+          searchValueInput={searchValueInput}
           message={message}
           setMessage={setMessage}
           movies={movies}

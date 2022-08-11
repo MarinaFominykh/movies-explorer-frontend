@@ -7,9 +7,18 @@ import {
   currentUserDefault,
 } from "../../contexts/currentUserContext.js";
 import InfoTooltip from "../InfoTooltip/InfoTooltip.js";
+import Header from "../Header/Header.js";
 import * as MainApi from "../../utils/MainApi.js";
 
-function Profile({ handleSignOut, user, onUpdateUser, message, showError }) {
+function Profile({
+  handleSignOut,
+  user,
+  onUpdateUser,
+  message,
+  showError,
+  onPopupWithMenu,
+  loggedIn,
+}) {
   const currentUser = useContext(CurrentUserContext);
   const [isClicked, setIsClicked] = useState(false);
   const [name, setName] = useState(user.data.name);
@@ -74,111 +83,114 @@ function Profile({ handleSignOut, user, onUpdateUser, message, showError }) {
   };
 
   return (
-    <section className="profile">
-      <h2 className="profile__title">Привет, {user.data.name}!</h2>
-      <form
-        className="profile__form"
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
-        <fieldset className="profile__input-container">
-          <label className="profile__label" htmlFor="name">
-            Имя
-            <input
-              className="profile__input"
-              id="name"
-              name="name"
-              required
-              minLength="2"
-              maxLength="30"
-              placeholder="Имя"
-              value={name}
-              disabled={!isClicked}
-              {...register("name", {
-                required: "Поле обязательно к заполнению",
-                minLength: {
-                  value: 2,
-                  message: "Минимальное количество символов: 2",
-                },
-                maxLength: {
-                  value: 30,
-                  message: "Максимальное количество символов: 30",
-                },
-                onChange: (e) => {
-                  handleInputNameChange(e);
-                },
-              })}
-            ></input>
-          </label>
-          <span
-            className={
-              errors?.name
-                ? "profile__error profile__error_visible"
-                : "profile__error profile__error_hidden"
-            }
-          >
-            {errors?.name?.message}
-          </span>
-          <label className="profile__label" htmlFor="email">
-            E-mail
-            <input
-              className="profile__input"
-              id="email"
-              type="email"
-              name="email"
-              required
-              placeholder="Почта"
-              value={email}
-              disabled={!isClicked}
-              {...register("email", {
-                required: "Поле обязательно к заполнению",
-                pattern: {
-                  value:
-                    /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/,
-                  message: "Введён некорректный e-mail",
-                },
-                onChange: (e) => {
-                  handleInputEmailChange(e);
-                },
-              })}
-            ></input>
-          </label>
-          <span
-            className={
-              errors?.email
-                ? "profile__error profile__error_visible"
-                : "profile__error profile__error_hidden"
-            }
-          >
-            {errors?.email?.message}
-          </span>
-        </fieldset>
-        <InfoTooltip message={message} showError={showError} />
-        <button
-          type="submit"
-          className={submitButtonClassName}
-          value="Сохранить"
+    <>
+      <section className="profile">
+        <h2 className="profile__title">Привет, {user.data.name}!</h2>
+        <form
+          className="profile__form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
         >
-          Сохранить
+          <fieldset className="profile__input-container">
+            <label className="profile__label" htmlFor="name">
+              Имя
+              <input
+                className="profile__input"
+                id="name"
+                name="name"
+                required
+                minLength="2"
+                maxLength="30"
+                placeholder="Имя"
+                value={name}
+                disabled={!isClicked}
+                {...register("name", {
+                  required: "Поле обязательно к заполнению",
+                  minLength: {
+                    value: 2,
+                    message: "Минимальное количество символов: 2",
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: "Максимальное количество символов: 30",
+                  },
+                  onChange: (e) => {
+                    handleInputNameChange(e);
+                  },
+                })}
+              ></input>
+            </label>
+            <span
+              className={
+                errors?.name
+                  ? "profile__error profile__error_visible"
+                  : "profile__error profile__error_hidden"
+              }
+            >
+              {errors?.name?.message}
+            </span>
+            <label className="profile__label" htmlFor="email">
+              E-mail
+              <input
+                className="profile__input"
+                id="email"
+                type="email"
+                name="email"
+                required
+                placeholder="Почта"
+                value={email}
+                disabled={!isClicked}
+                {...register("email", {
+                  required: "Поле обязательно к заполнению",
+                  pattern: {
+                    value:
+                      /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/,
+                    message: "Введён некорректный e-mail",
+                  },
+                  onChange: (e) => {
+                    handleInputEmailChange(e);
+                  },
+                })}
+              ></input>
+            </label>
+            <span
+              className={
+                errors?.email
+                  ? "profile__error profile__error_visible"
+                  : "profile__error profile__error_hidden"
+              }
+            >
+              {errors?.email?.message}
+            </span>
+          </fieldset>
+          <InfoTooltip message={message} showError={showError} />
+          <button
+            type="submit"
+            className={submitButtonClassName}
+            value="Сохранить"
+            disabled={!newUserData ? true : false}
+          >
+            Сохранить
+          </button>
+        </form>
+        <button
+          type="button"
+          className={editButtonClassName}
+          value="Редактировать"
+          onClick={handleEditButton}
+        >
+          Редактировать
         </button>
-      </form>
-      <button
-        type="button"
-        className={editButtonClassName}
-        value="Редактировать"
-        onClick={handleEditButton}
-      >
-        Редактировать
-      </button>
-      <button
-        type="button"
-        className={signOutButtonClassName}
-        value="Выйти из аккаунта"
-        onClick={handleSignOut}
-      >
-        Выйти из аккаута
-      </button>
-    </section>
+        <button
+          type="button"
+          className={signOutButtonClassName}
+          value="Выйти из аккаунта"
+          onClick={handleSignOut}
+        >
+          Выйти из аккаута
+        </button>
+      </section>
+    </>
   );
 }
 

@@ -24,7 +24,10 @@ function Login(props) {
 
   return (
     <section className="login">
-      <div className="login__logo"></div>
+      <Link to="/">
+        <div className="login__logo"></div>
+      </Link>
+
       <h2 className="login__title">Рады видеть!</h2>
       <form
         className="login__form"
