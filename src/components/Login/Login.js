@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Login.css";
+import InfoTooltip from "../InfoTooltip/InfoTooltip.js";
 
-function Login() {
+function Login(props) {
   const {
     register,
     formState: { errors, isValid },
@@ -14,12 +15,19 @@ function Login() {
     isValid ? "login__submit" : "login__submit_disable"
   }`;
   const onSubmit = (e) => {
+    if (!e.email || !e.password) {
+      return;
+    }
+    props.handleLogin(e.email, e.password).catch(console.log);
     reset();
   };
 
   return (
     <section className="login">
-      <div className="login__logo"></div>
+      <Link to="/">
+        <div className="login__logo"></div>
+      </Link>
+
       <h2 className="login__title">Рады видеть!</h2>
       <form
         className="login__form"
@@ -27,7 +35,7 @@ function Login() {
         noValidate
       >
         <fieldset className="login__inputs">
-          <label className="login__label" for="email">
+          <label className="login__label" htmlFor="email">
             E-mail
             <input
               id="email"
@@ -54,7 +62,7 @@ function Login() {
             </span>
           </label>
 
-          <label className="login__label" for="password">
+          <label className="login__label" htmlFor="password">
             Пароль
             <input
               id="password"
@@ -76,9 +84,12 @@ function Login() {
             </span>
           </label>
         </fieldset>
-        <button type="submit" className={submitClassName} value="Войти">
-          Войти
-        </button>
+        <div>
+          <InfoTooltip message={props.message} />
+          <button type="submit" className={submitClassName} value="Войти">
+            Войти
+          </button>
+        </div>
       </form>
 
       <Link to="sign-up" className="login__register-link">

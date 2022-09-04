@@ -2,19 +2,44 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Header from "../Header/Header.js";
 import Movies from "../Movies/Movies.js";
-import Footer from "../Footer/Footer.js";
-import { savedMovies } from "../../utils/savedMovies.js";
 
-function SavedMovies({ onPopupWithMenu }) {
-  const [savedMoviesCards, setSavedMovies] = useState(savedMovies);
-
+function SavedMovies({
+  onPopupWithMenu,
+  loggedIn,
+  onSubmitSearch,
+  message,
+  setMessage,
+  movies,
+  allMovies,
+  checkLiked,
+  sortShortMovies,
+  toggleMovieLike,
+  preloader,
+  setPreloader,
+  searchValueInput,
+  setSearchValueInput,
+  onChange,
+}) {
   return (
     <>
-      <Header onPopupWithMenu={onPopupWithMenu} />
+      <Header onPopupWithMenu={onPopupWithMenu} loggedIn={loggedIn} />
       <main className="main">
-        <Movies moviesCards={savedMoviesCards} />
+        <Movies
+          onSubmitSearch={onSubmitSearch}
+          setSearchValueInput={setSearchValueInput}
+          onChange={onChange}
+          searchValueInput={searchValueInput}
+          message={message}
+          setMessage={setMessage}
+          movies={movies}
+          checkLiked={checkLiked}
+          sortShortMovies={sortShortMovies}
+          allMovies={allMovies}
+          toggleMovieLike={toggleMovieLike}
+          setPreloader={setPreloader}
+          preloader={preloader}
+        />
       </main>
-      <Footer />
     </>
   );
 }

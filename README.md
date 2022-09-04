@@ -30,3 +30,17 @@
 - JavaScript;
 - React;
 - Git;
+
+## Ссылки:
+
+- pull request:
+  https://github.com/MarinaFominykh/movies-explorer-frontend/pull/2
+- макет:
+  https://www.figma.com/file/bZn6nidGN1ybCFmU8ea3xm/%D0%9C%D0%B0%D0%BA%D0%B5%D1%82-%D0%BD%D0%B0-%D1%80%D0%B5%D0%B2%D1%8C%D1%8E?node-id=891%3A3857
+- фронт:
+  https://pilona.nomoredomains.xyz
+- бэк:
+  http://api.pilona.nomoreparties.sbs
+
+- публичный IP:
+  51.250.8.186

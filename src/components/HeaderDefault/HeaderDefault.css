@@ -10,7 +10,14 @@
 
 .header__link {
     text-decoration: none;
+}
+
+.header__link_theme_light {
     color: #000;
+}
+
+.header__link_theme_dark {
+    color: #fff;
 }
 
 .header__nav-item {
@@ -38,6 +45,12 @@
     justify-content: space-between;
     align-items: center;
     gap: 13px;
+}
+
+.header__account {
+    width: 110px;
+    height: 36px;
+    background: url(../../images/account_dark.png) no-repeat center;
 }
 
 .header__account-text {

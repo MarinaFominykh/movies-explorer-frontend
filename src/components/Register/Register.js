@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Register.css";
+import InfoTooltip from "../InfoTooltip/InfoTooltip.js";
+import * as MainApi from "../../utils/MainApi.js";
 
 function Register(props) {
   const {
@@ -14,12 +16,16 @@ function Register(props) {
     isValid ? "register__submit" : "register__submit_disable"
   }`;
   const onSubmit = (e) => {
+    props.handleRegister(e.name, e.email, e.password);
     reset();
   };
 
   return (
     <section className="register">
-      <div className="register__logo"></div>
+      <Link to="/">
+        <div className="register__logo"></div>
+      </Link>
+
       <h2 className="register__title">Добро пожаловать!</h2>
       <form
         className="register__form"
@@ -36,6 +42,14 @@ function Register(props) {
               placeholder="Имя"
               {...register("name", {
                 required: "Поле обязательно к заполнению",
+                minLength: {
+                  value: 2,
+                  message: "Минимальное количество символов: 2",
+                },
+                maxLength: {
+                  value: 30,
+                  message: "Максимальное количество символов: 30",
+                },
               })}
             />
             <span
@@ -98,14 +112,17 @@ function Register(props) {
             </span>
           </label>
         </fieldset>
-        <button
-          type="submit"
-          className={submitClassName}
-          value="Зарегистрироваться"
-          disabled={!isValid}
-        >
-          Зарегистрироваться
-        </button>
+        <div>
+          <InfoTooltip message={props.message} showError={props.showError} />
+          <button
+            type="submit"
+            className={submitClassName}
+            value="Зарегистрироваться"
+            disabled={!isValid}
+          >
+            Зарегистрироваться
+          </button>
+        </div>
       </form>
 
       <Link to="sign-in" className="register__entry-link">
